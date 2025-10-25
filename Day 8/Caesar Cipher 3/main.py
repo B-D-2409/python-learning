@@ -28,5 +28,16 @@ shift = int(input("Type the shift number:\n"))
 
 caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
 
+should_continue = True
 
+while should_continue:
+    direction = input("Type 'yes' if you want to go again. Otherwise, type 'no'.\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
 
+    caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+
+    restart = input("Type 'yes' if you want to go again. Otherwise, type 'no'.\n").lower()
+    if restart == "no":
+        should_continue = False
+        print("Goodbye")

@@ -21,7 +21,7 @@ def compare_famous(A_PLAYER, B_PLAYER, score):
 
     if chosen_player["follower_count"] > other_player["follower_count"]:
         score += 1
-        print(f"✅ You're right! Current score: {score}.")
+        print(f" You're right! Current score: {score}.")
         # Continue the game: A becomes B, B becomes new random
         A_PLAYER = B_PLAYER
         B_PLAYER = random.choice(data)

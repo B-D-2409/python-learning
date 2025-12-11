@@ -1,9 +1,18 @@
 from tkinter import *
+import requests
+from requests import RequestException
 
 
 def get_quote():
-    pass
-    #Write your code here.
+    try:
+      response = requests.get(url="https://api.kanye.rest")
+      response.raise_for_status()
+      data = response.json()
+      quote = data["quote"]
+      canvas.itemconfig(quote_text,text=quote)
+    except RequestException:
+        canvas.itemconfig(quote_text, text="Error: Could not fetch quote.")
+
 
 
 

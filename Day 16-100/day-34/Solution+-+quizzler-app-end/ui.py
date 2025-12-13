@@ -1,8 +1,8 @@
 from tkinter import *
-from traceback import print_tb
-
 from quiz_brain import QuizBrain
+
 THEME_COLOR = "#375362"
+
 
 class QuizInterface:
 
@@ -39,6 +39,16 @@ class QuizInterface:
 
         self.window.mainloop()
 
+    def get_next_question(self):
+        self.canvas.config(bg="white")
+        if self.quiz.still_has_questions():
+            self.score_label.config(text=f"Score: {self.quiz.score}")
+            q_text = self.quiz.next_question()
+            self.canvas.itemconfig(self.question_text, text=q_text)
+        else:
+            self.canvas.itemconfig(self.question_text, text="You've reached the end of the quiz.")
+            self.true_button.config(state="disabled")
+            self.false_button.config(state="disabled")
 
     def true_pressed(self):
         self.give_feedback(self.quiz.check_answer("True"))
@@ -47,39 +57,12 @@ class QuizInterface:
         is_right = self.quiz.check_answer("False")
         self.give_feedback(is_right)
 
-    def get_next_question(self):
-        self.canvas.config(bg="white")
-
-        if self.quiz.still_has_questions():
-          q_text = self.quiz.next_question()
-          self.canvas.itemconfig(self.question_text, text=q_text)
-
-        else:
-            self.canvas.itemconfig(self.question_text, text="You've completed the quiz!")
-            self.true_button.config(state="disabled")
-            self.false_button.config(state="disabled")
-
-    def check_answer(self, user_answer):
-        correct_answer = self.current_question.answer
-        is_right = user_answer.lower() == correct_answer.lower()
-
+    def give_feedback(self, is_right):
         if is_right:
-            self.score += 1
-
-        return is_right
-
-    def give_feedback(self, is_right: bool):
-        if is_right:
-            self.score_label.config(text=f"Score: {self.quiz.score}")
             self.canvas.config(bg="green")
         else:
             self.canvas.config(bg="red")
-
-        self.window.after(700, self.get_next_question)
-
-
-
-
+        self.window.after(1000, self.get_next_question)
 
 
 

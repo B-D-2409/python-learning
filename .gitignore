@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.venv1/
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# Local / generated files
+words_to_learn.csv
